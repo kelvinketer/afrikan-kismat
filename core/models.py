@@ -88,3 +88,16 @@ class ItineraryDay(models.Model):
 
     def __str__(self):
         return f"Day {self.day_number}: {self.title}"
+    # --- ADD THIS AT THE BOTTOM OF core/models.py ---
+
+class Partner(models.Model):
+    name = models.CharField(max_length=100)
+    logo = CloudinaryField('image')
+    website = models.URLField(blank=True, null=True)
+    order = models.IntegerField(default=0, help_text="Order to display (lowest first)")
+    
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.name

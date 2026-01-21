@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from .models import SafariPackage, Destination, Testimonial
+# --- UPDATED IMPORT: Added 'Partner' to the list ---
+from .models import SafariPackage, Destination, Testimonial, Partner
 from .forms import ContactForm
 
 # --- VIEWS ---
@@ -21,14 +22,18 @@ def home(request):
     if not slider_destinations.exists():
         slider_destinations = Destination.objects.all()
 
-    # 3. NEW: Fetch Featured Safaris (First 3)
-    # Ideally, you'd mark them as 'featured' in the DB, but for now, we grab the latest 3.
+    # 3. Fetch Featured Safaris (First 3)
     safari_packages = SafariPackage.objects.all().order_by('-id')[:3]
+
+    # 4. NEW: Fetch Partners for the scrolling logos
+    # We grab all partners to display in the footer/slider area
+    partners = Partner.objects.all()
 
     context = {
         'testimonials': testimonials,
         'slider_destinations': slider_destinations,
         'safari_packages': safari_packages,
+        'partners': partners, # <--- Pass the partners to the template
     }
     
     return render(request, 'index.html', context)

@@ -34,3 +34,13 @@ class InquiryAdmin(admin.ModelAdmin):
 class TestimonialAdmin(admin.ModelAdmin):
     list_display = ('client_name', 'rating', 'is_active')
     list_filter = ('rating', 'is_active')
+    
+from django.contrib import admin
+from .models import Destination, SafariPackage, Testimonial, Inquiry, Partner # <--- Add Partner here
+
+# ... keep your existing registrations ...
+
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'website', 'order')
+    search_fields = ('name',)
