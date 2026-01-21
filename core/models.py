@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField  # <--- Crucial Import
 
 class SafariPackage(models.Model):
     # Basic Info
@@ -19,9 +20,6 @@ class SafariPackage(models.Model):
 
     def __str__(self):
         return self.title
-    
-
-# ... (SafariPackage class is above this)
 
 class Destination(models.Model):
     name = models.CharField(max_length=200)  # e.g., "Masai Mara"
@@ -44,8 +42,6 @@ class Destination(models.Model):
     # Helper to split highlights for the template
     def get_highlights_list(self):
         return [h.strip() for h in self.highlights.split(',')]
-    
-    # ... (Destination Model is above this)
 
 class Inquiry(models.Model):
     name = models.CharField(max_length=100)
@@ -56,8 +52,6 @@ class Inquiry(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.subject}"
-    
-    # ... (Inquiry model is above this)
 
 class Testimonial(models.Model):
     client_name = models.CharField(max_length=100)
@@ -69,9 +63,6 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return f"{self.client_name} ({self.rating} stars)"
-    
-
-# ... existing imports (make sure SafariPackage is defined above this)
 
 class ItineraryDay(models.Model):
     safari = models.ForeignKey(SafariPackage, related_name='itinerary_days', on_delete=models.CASCADE)
@@ -88,7 +79,6 @@ class ItineraryDay(models.Model):
 
     def __str__(self):
         return f"Day {self.day_number}: {self.title}"
-    # --- ADD THIS AT THE BOTTOM OF core/models.py ---
 
 class Partner(models.Model):
     name = models.CharField(max_length=100)
