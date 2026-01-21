@@ -8,12 +8,18 @@ pip install --upgrade pip
 # Install dependencies
 pip install -r requirements.txt
 
+# --- NEW: Ensure static directories exist ---
+# This prevents errors if Git didn't upload empty folders
+mkdir -p static
+mkdir -p staticfiles
+
 # Convert static files
-python manage.py collectstatic --no-input
+# Added --clear to remove old broken files before creating new ones
+python manage.py collectstatic --noinput --clear
 
 # Apply database migrations
 python manage.py migrate
 
-# --- NEW: Create Superuser Automatically ---
+# Create Superuser Automatically
 # The "|| true" part ensures the build doesn't fail if the user already exists
 python manage.py createsuperuser --noinput || true
