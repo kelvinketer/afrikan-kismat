@@ -5,39 +5,74 @@
 
 {% block content %}
 
-<div class="relative h-screen w-full overflow-hidden">
+<style>
+    /* Custom Animation for the Background Slider */
+    @keyframes fadeBackground {
+        0% { opacity: 1; }
+        33% { opacity: 1; }
+        43% { opacity: 0; }
+        90% { opacity: 0; }
+        100% { opacity: 1; }
+    }
     
-    <div id="hero-slider" class="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out transform scale-105" 
-         style="background-image: url('https://images.unsplash.com/photo-1547471080-75451c1c6351?q=80&w=2000');">
-         <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/70"></div>
-    </div>
+    .hero-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        animation: fadeBackground 15s infinite;
+    }
 
-    <div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 md:px-12 max-w-5xl mx-auto">
-        
-        <span class="text-safari-gold font-bold tracking-[0.3em] uppercase mb-6 text-xs md:text-sm animate-pulse">
+    /* Stagger the animations so they overlap smoothly */
+    /* Slide 1: Elephants */
+    .slide-1 { 
+        animation-delay: 0s; 
+        background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=80'); 
+    } 
+    /* Slide 2: Lion Profile */
+    .slide-2 { 
+        animation-delay: 5s; 
+        background-image: url('https://images.unsplash.com/photo-1549396535-c11d5c55b9df?auto=format&fit=crop&w=1920&q=80'); 
+    } 
+    /* Slide 3: Safari Jeep/Landscape */
+    .slide-3 { 
+        animation-delay: 10s; 
+        background-image: url('https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1920&q=80'); 
+    }
+</style>
+
+<div class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-safari-dark">
+    
+    <div class="hero-slide slide-1 z-0"></div>
+    <div class="hero-slide slide-2 z-0"></div>
+    <div class="hero-slide slide-3 z-0"></div>
+    
+    <div class="absolute inset-0 bg-black/40 z-10"></div>
+    
+    <div class="relative z-20 text-center text-white px-4 max-w-5xl mx-auto mt-16">
+        <span class="text-safari-gold font-bold tracking-[0.4em] uppercase text-sm md:text-base mb-6 block animate-pulse">
             Welcome to the Wild
         </span>
-
-        <h1 class="text-white text-4xl md:text-6xl font-bold mb-8 leading-tight drop-shadow-2xl tracking-widest uppercase font-header">
-            Afrikan Kismat <br> Expeditions
+        <h1 class="text-5xl md:text-7xl font-black uppercase tracking-wide drop-shadow-2xl mb-8 font-header leading-tight">
+            Afrikan Kismat <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Expeditions</span>
         </h1>
-        
-        <p class="text-gray-100 text-lg md:text-xl mb-12 max-w-2xl font-light drop-shadow-md leading-relaxed opacity-90">
+        <p class="text-lg md:text-2xl font-medium opacity-90 leading-relaxed max-w-3xl mx-auto mb-12 text-gray-100">
             Experience the raw beauty of East Africa with authentic, local guidance.
         </p>
         
-        <div class="flex flex-col md:flex-row gap-6">
-            <a href="{% url 'safaris' %}" class="bg-safari-clay text-white px-10 py-4 rounded-full font-bold uppercase tracking-wider text-xs hover:bg-white hover:text-safari-clay transition duration-300 shadow-xl border-2 border-transparent hover:border-safari-clay hover:scale-105 transform">
+        <div class="flex flex-col md:flex-row gap-6 justify-center">
+            <a href="{% url 'safaris' %}" class="bg-safari-clay text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest hover:bg-white hover:text-safari-clay transition duration-300 shadow-xl hover:scale-105 transform border-2 border-transparent">
                 View Packages
             </a>
-            <a href="{% url 'contact' %}" class="bg-transparent border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase tracking-wider text-xs hover:bg-white hover:text-gray-900 transition duration-300 shadow-xl">
+            <a href="{% url 'contact' %}" class="bg-transparent text-white border-2 border-white px-10 py-5 rounded-full font-bold uppercase tracking-widest hover:bg-white hover:text-safari-dark transition duration-300 shadow-xl hover:scale-105 transform">
                 Design My Trip
             </a>
         </div>
     </div>
 
-    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce opacity-70">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7"></path></svg>
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+        <i class="fas fa-chevron-down text-white text-2xl opacity-70"></i>
     </div>
 </div>
 
@@ -392,23 +427,5 @@
         </a>
     </div>
 </section>
-
-<script>
-    const heroImages = [
-        "https://images.unsplash.com/photo-1547471080-75451c1c6351?q=80&w=2000",
-        "https://images.unsplash.com/photo-1549216168-5a2a6b29f957?q=80&w=2000",
-        "https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?q=80&w=2000"
-    ];
-    
-    let currentImageIndex = 0;
-    const sliderElement = document.getElementById('hero-slider');
-
-    function changeBackground() {
-        currentImageIndex = (currentImageIndex + 1) % heroImages.length;
-        sliderElement.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
-    }
-
-    setInterval(changeBackground, 5000);
-</script>
 
 {% endblock %}
