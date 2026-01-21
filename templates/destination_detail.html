@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ destination.name }} | Afrikan Kismat{% endblock %}
+
+{% block content %}
+
+<div class="relative h-[60vh] w-full flex items-center justify-center">
+    <div class="absolute inset-0 bg-cover bg-center" 
+         style="background-image: url('{{ destination.image_url }}');">
+         <div class="absolute inset-0 bg-black/50"></div>
+    </div>
+    
+    <div class="relative z-10 text-center text-white px-4">
+        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wide drop-shadow-lg mb-4">
+            {{ destination.name }}
+        </h1>
+        <p class="text-lg md:text-xl font-medium max-w-2xl mx-auto opacity-90 text-safari-gold">
+            {{ destination.subtitle }}
+        </p>
+    </div>
+</div>
+
+<section class="py-16 bg-white px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+        
+        <div class="md:col-span-2">
+            <h2 class="text-3xl font-black text-safari-clay mb-6 font-header">Overview</h2>
+            <p class="text-gray-600 text-lg leading-relaxed mb-6 whitespace-pre-line">
+                {{ destination.description }}
+            </p>
+
+            <h3 class="text-2xl font-bold text-gray-800 mb-4 font-header mt-10">Highlights</h3>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {% for highlight in destination.get_highlights_list %}
+                <li class="flex items-start gap-3">
+                    <span class="text-safari-green text-xl">✔</span>
+                    <span class="text-gray-700 font-medium">{{ highlight }}</span>
+                </li>
+                {% empty %}
+                <li class="text-gray-500 italic">No highlights listed yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="relative">
+            <div class="sticky top-24 bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-lg">
+                <h3 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-2">Quick Facts</h3>
+                
+                <ul class="space-y-4 mb-8">
+                    <li class="flex justify-between text-sm">
+                        <span class="text-gray-500">Best Time:</span>
+                        <span class="font-bold text-gray-800">{{ destination.best_time }}</span>
+                    </li>
+                    <li class="flex justify-between text-sm">
+                        <span class="text-gray-500">Ideal Stay:</span>
+                        <span class="font-bold text-gray-800">{{ destination.ideal_stay }}</span>
+                    </li>
+                    <li class="flex justify-between text-sm">
+                        <span class="text-gray-500">Wildlife:</span>
+                        <span class="font-bold text-gray-800">{{ destination.wildlife }}</span>
+                    </li>
+                </ul>
+
+                <div class="text-center">
+                    <p class="text-sm text-gray-500 mb-4">Dreaming of {{ destination.name }}?</p>
+                    <a href="{% url 'contact' %}" class="block w-full bg-safari-clay text-white font-bold py-3 rounded hover:bg-safari-green transition uppercase tracking-wide">
+                        Plan My Trip Here
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
