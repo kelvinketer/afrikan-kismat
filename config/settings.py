@@ -3,8 +3,6 @@ Django settings for config project.
 """
 
 import os
-import sys
-import django
 import dj_database_url
 from pathlib import Path
 
@@ -25,7 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', # Crucial
     'core',
 ]
 
@@ -80,35 +78,20 @@ USE_I18N = True
 USE_TZ = True
 
 
-# --- STATIC FILES CONFIG (FORCE MODE) ---
+# --- STATIC FILES CONFIG (ISOLATION TEST) ---
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# 1. Calculate the exact path to Django Admin files
-DJANGO_ROOT = os.path.dirname(django.__file__)
-ADMIN_STATIC_PATH = os.path.join(DJANGO_ROOT, 'contrib', 'admin', 'static')
+# 1. REMOVED STATICFILES_DIRS to prevent "directory missing" errors.
+# (Django will naturally find Admin files without this).
 
-# 2. Define your local static folder
-CORE_STATIC_DIR = os.path.join(BASE_DIR, 'core', 'static')
-if not os.path.exists(CORE_STATIC_DIR):
-    os.makedirs(CORE_STATIC_DIR)
+# 2. REMOVED STATICFILES_FINDERS.
+# (Letting Django use its default behavior is safer right now).
 
-# 3. Add BOTH to the explicit directories list
-STATICFILES_DIRS = [
-    ADMIN_STATIC_PATH,  # Force Django to see Admin files here
-    CORE_STATIC_DIR,    # Force Django to see your local files here
-]
-
-# 4. [CRITICAL] Disable the automatic 'AppDirectoriesFinder'
-# We ONLY use 'FileSystemFinder'. This stops the "Duplicate" warnings
-# and forces Django to copy exactly what is in STATICFILES_DIRS.
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-]
-
-# 5. Storage Engine
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# 3. CHANGED STORAGE to Standard Django (No compression).
+# This tests if Whitenoise was the problem.
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 
 # --- CLOUDINARY CONFIG ---
