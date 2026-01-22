@@ -3,18 +3,20 @@ Django settings for config project.
 """
 
 import os
+import sys
+import django
 import dj_database_url
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings
+# Security
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dl)5blh(x9o$fp_jo3(0wktx(hm)u$7^u#eg+kyfc!n#(w(*xy')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = ['*']
 
-# Application definition
+# Apps
 INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
@@ -23,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', # Crucial
+    'django.contrib.staticfiles',
     'core',
 ]
 
@@ -78,20 +80,40 @@ USE_I18N = True
 USE_TZ = True
 
 
-# --- STATIC FILES CONFIG (ISOLATION TEST) ---
+# --- STATIC FILES CONFIG (DIAGNOSTIC MODE) ---
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# 1. REMOVED STATICFILES_DIRS to prevent "directory missing" errors.
-# (Django will naturally find Admin files without this).
+# 1. Define Local Static
+CORE_STATIC_DIR = os.path.join(BASE_DIR, 'core', 'static')
+if not os.path.exists(CORE_STATIC_DIR):
+    os.makedirs(CORE_STATIC_DIR)
 
-# 2. REMOVED STATICFILES_FINDERS.
-# (Letting Django use its default behavior is safer right now).
+# 2. Define Admin Static Manually
+DJANGO_ROOT = os.path.dirname(django.__file__)
+ADMIN_STATIC_PATH = os.path.join(DJANGO_ROOT, 'contrib', 'admin', 'static')
 
-# 3. CHANGED STORAGE to Standard Django (No compression).
-# This tests if Whitenoise was the problem.
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# 3. PRINT DEBUG INFO TO LOGS (Look for these lines in Render!)
+print(f"--- DEBUG: BASE_DIR is {BASE_DIR}")
+print(f"--- DEBUG: STATIC_ROOT is {STATIC_ROOT}")
+print(f"--- DEBUG: CORE_STATIC_DIR is {CORE_STATIC_DIR}")
+print(f"--- DEBUG: ADMIN_STATIC_PATH is {ADMIN_STATIC_PATH}")
+print(f"--- DEBUG: Does Admin Path exist? {os.path.exists(ADMIN_STATIC_PATH)}")
+
+# 4. Use Both Paths Explicitly
+STATICFILES_DIRS = [
+    CORE_STATIC_DIR,
+    ADMIN_STATIC_PATH, 
+]
+
+# 5. Use Standard Finders (This caused duplicates before, but we need to see if it works now)
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
 # --- CLOUDINARY CONFIG ---
