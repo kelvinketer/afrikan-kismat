@@ -8,7 +8,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dl)5blh(x9o$fp_jo3(0wktx(hm)u$7^u#eg+kyfc!n#(w(*xy')
-# We keep DEBUG=True for now to help with errors, but Whitenoise handles static files either way.
+
+# We keep DEBUG=True for now to help with errors.
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = ['*']
 
@@ -29,7 +30,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # <--- ENABLED AGAIN (Essential for Render)
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -90,8 +91,7 @@ STATICFILES_DIRS = [
     CORE_STATIC_DIR,
 ]
 
-# [CRITICAL FIX] Use Whitenoise, but the "Compressed" version (not Manifest).
-# This serves files correctly on Render but ignores hashing errors.
+# Use Whitenoise, but the "Compressed" version (not Manifest).
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # --- CLOUDINARY CONFIG ---
