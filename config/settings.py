@@ -31,7 +31,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware', # DISABLED for now to test raw copy
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,40 +80,33 @@ USE_I18N = True
 USE_TZ = True
 
 
-# --- STATIC FILES CONFIG (DIAGNOSTIC MODE) ---
+# --- STATIC FILES CONFIG (SNIPER MODE) ---
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# 1. Define Local Static
+# 1. Define Paths
 CORE_STATIC_DIR = os.path.join(BASE_DIR, 'core', 'static')
 if not os.path.exists(CORE_STATIC_DIR):
     os.makedirs(CORE_STATIC_DIR)
 
-# 2. Define Admin Static Manually
 DJANGO_ROOT = os.path.dirname(django.__file__)
 ADMIN_STATIC_PATH = os.path.join(DJANGO_ROOT, 'contrib', 'admin', 'static')
 
-# 3. PRINT DEBUG INFO TO LOGS (Look for these lines in Render!)
-print(f"--- DEBUG: BASE_DIR is {BASE_DIR}")
-print(f"--- DEBUG: STATIC_ROOT is {STATIC_ROOT}")
-print(f"--- DEBUG: CORE_STATIC_DIR is {CORE_STATIC_DIR}")
-print(f"--- DEBUG: ADMIN_STATIC_PATH is {ADMIN_STATIC_PATH}")
-print(f"--- DEBUG: Does Admin Path exist? {os.path.exists(ADMIN_STATIC_PATH)}")
-
-# 4. Use Both Paths Explicitly
+# 2. Force Django to look here
 STATICFILES_DIRS = [
     CORE_STATIC_DIR,
     ADMIN_STATIC_PATH, 
 ]
 
-# 5. Use Standard Finders (This caused duplicates before, but we need to see if it works now)
+# 3. CRITICAL: ONLY use FileSystemFinder
+# We removed 'AppDirectoriesFinder'. This prevents the "Duplicate/Ignored" error.
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# 4. Use Basic Storage (No Compression)
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 
 # --- CLOUDINARY CONFIG ---
