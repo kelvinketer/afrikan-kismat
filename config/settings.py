@@ -6,10 +6,10 @@ import os
 import dj_database_url
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings
+# Security
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dl)5blh(x9o$fp_jo3(0wktx(hm)u$7^u#eg+kyfc!n#(w(*xy')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = ['*']
@@ -23,13 +23,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', # Crucial for AppDirectoriesFinder
+    'django.contrib.staticfiles',
     'core',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # Re-enabled for production speed
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -78,12 +78,12 @@ USE_I18N = True
 USE_TZ = True
 
 
-# --- STATIC FILES CONFIG (GOLDILOCKS STANDARD) ---
+# --- STATIC FILES CONFIG ---
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# 1. Ensure the local static folder exists to prevent errors
+# 1. Create the local static folder if it doesn't exist
 CORE_STATIC_DIR = os.path.join(BASE_DIR, 'core', 'static')
 if not os.path.exists(CORE_STATIC_DIR):
     os.makedirs(CORE_STATIC_DIR)
@@ -93,16 +93,14 @@ STATICFILES_DIRS = [
     CORE_STATIC_DIR,
 ]
 
-# 3. USE STANDARD FINDERS
-# 'AppDirectoriesFinder' is what finds the Admin files automatically.
-# We proved earlier that this works (it found duplicates).
+# 3. Use standard finders (This works when folders exist)
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-# 4. Use Whitenoise with the forgiving setting
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# 4. Use Whitenoise with Compression
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # --- CLOUDINARY CONFIG ---
