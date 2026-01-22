@@ -118,12 +118,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Explicitly point to core/static where your logo lives
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'core', 'static'),
-]
+# [REMOVED] STATICFILES_DIRS is deleted to prevent "directory not found" errors.
 
-# UPDATED: Use the "Forgiving" storage engine (Removed 'Manifest')
+# Use the "Forgiving" storage engine
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
