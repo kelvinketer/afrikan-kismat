@@ -2,24 +2,19 @@
 # Exit on error
 set -o errexit
 
-# Upgrade pip
-pip install --upgrade pip
-
 # Install dependencies
 pip install -r requirements.txt
 
-# --- NEW: Ensure static directories exist ---
-# This prevents errors if Git didn't upload empty folders
-mkdir -p static
+# --- FIX 1: Create the missing folders explicitly ---
+# This fixes the "directory does not exist" warning
+mkdir -p core/static
 mkdir -p staticfiles
 
-# Convert static files
-# Added --clear to remove old broken files before creating new ones
+# --- FIX 2: Collect static files ---
 python manage.py collectstatic --noinput --clear
 
 # Apply database migrations
 python manage.py migrate
 
-# Create Superuser Automatically
-# The "|| true" part ensures the build doesn't fail if the user already exists
-python manage.py createsuperuser --noinput || true# Trigger auto-deploy test
+# --- FIX 3: Typo corrected (removed the accidental '#') ---
+python manage.py createsuperuser --noinput || true
