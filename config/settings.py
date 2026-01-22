@@ -8,6 +8,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dl)5blh(x9o$fp_jo3(0wktx(hm)u$7^u#eg+kyfc!n#(w(*xy')
+# We keep DEBUG=True for now to help with errors, but Whitenoise handles static files either way.
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = ['*']
 
@@ -25,7 +26,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',  # DISABLED TEMPORARILY
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # <--- ENABLED AGAIN (Essential for Render)
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,7 +78,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Ensure core/static exists (Created by our script)
+# Ensure core/static exists (Created by our build_assets.py script)
 CORE_STATIC_DIR = os.path.join(BASE_DIR, 'core', 'static')
 if not os.path.exists(CORE_STATIC_DIR):
     os.makedirs(CORE_STATIC_DIR)
@@ -86,9 +87,9 @@ STATICFILES_DIRS = [
     CORE_STATIC_DIR,
 ]
 
-# [CRITICAL FIX] Use the default Django storage.
-# This ignores conflicts and just copies the files.
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# [CRITICAL FIX] Use Whitenoise, but the "Compressed" version (not Manifest).
+# This serves files correctly on Render but ignores hashing errors.
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # --- CLOUDINARY CONFIG ---
 CLOUDINARY_STORAGE = {
