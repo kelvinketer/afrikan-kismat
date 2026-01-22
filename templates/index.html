@@ -40,30 +40,6 @@
         animation-delay: 10s; 
         background-image: url('https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1920&q=80'); 
     }
-
-    /* --- NEW: Infinite Scroll Animation for Partners --- */
-    @keyframes scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-    }
-    
-    .animate-scroll-row {
-        display: flex;
-        width: max-content; /* Ensure it fits all items */
-        animation: scroll 40s linear infinite; /* Adjust speed here */
-    }
-    
-    .animate-scroll-row-slow {
-        display: flex;
-        width: max-content;
-        animation: scroll 60s linear infinite; /* Slower speed for 2nd row */
-    }
-
-    /* Pause animation on hover */
-    .partner-track:hover .animate-scroll-row,
-    .partner-track:hover .animate-scroll-row-slow {
-        animation-play-state: paused;
-    }
 </style>
 
 <div class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-safari-dark">
@@ -361,39 +337,27 @@
     </div>
 </section>
 
-<section class="py-20 bg-gray-50 border-t border-gray-200 overflow-hidden">
+<section class="py-20 bg-gray-50 border-t border-gray-200">
     <div class="max-w-7xl mx-auto px-6 mb-10 text-center">
         <span class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">
             Official Partners & Accreditations
         </span>
     </div>
     
-    <div class="relative w-full partner-track space-y-8">
-        <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
-
+    <div class="max-w-5xl mx-auto px-6">
         {% if partners %}
-            <div class="flex gap-16 animate-scroll-row">
-                {% for i in "12" %} 
-                    {% for partner in partners %}
-                    <div class="flex-shrink-0 grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition duration-300">
-                        {% if partner.logo %}
-                            <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="h-16 w-auto object-contain">
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-
-            <div class="flex gap-16 animate-scroll-row-slow">
-                {% for i in "12" %} 
-                    {% for partner in partners %}
-                    <div class="flex-shrink-0 grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition duration-300">
-                        {% if partner.logo %}
-                            <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="h-12 w-auto object-contain">
-                        {% endif %}
-                    </div>
-                    {% endfor %}
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-16">
+                {% for partner in partners %}
+                <div class="flex-shrink-0 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition duration-300 transform hover:scale-105">
+                    {% if partner.logo %}
+                        <img src="{{ partner.logo.url }}" 
+                             alt="{{ partner.name }}" 
+                             class="h-16 w-auto object-contain"
+                             title="{{ partner.name }}">
+                    {% else %}
+                        <span class="text-sm font-bold text-gray-400">{{ partner.name }}</span>
+                    {% endif %}
+                </div>
                 {% endfor %}
             </div>
         {% else %}

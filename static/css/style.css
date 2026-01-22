@@ -20,6 +20,7 @@ h1, h2, h3, h4, h5, h6,
 .hide-scroll-bar::-webkit-scrollbar {
     display: none;
 }
+
 /* IE, Edge and Firefox */
 .hide-scroll-bar {
     -ms-overflow-style: none;  /* IE and Edge */
