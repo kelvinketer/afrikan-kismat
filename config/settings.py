@@ -118,13 +118,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# UPDATED: Explicitly point to core/static where your logo lives
+# Explicitly point to core/static where your logo lives
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'core', 'static'),
 ]
 
-# UPDATED: Use Manifest storage for better caching and reliability
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# UPDATED: Use the "Forgiving" storage engine (Removed 'Manifest')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
 # --- CLOUDINARY MEDIA CONFIG (Permanent Images) ---
