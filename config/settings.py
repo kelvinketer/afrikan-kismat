@@ -30,7 +30,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Keep Middleware active
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -91,8 +91,10 @@ STATICFILES_DIRS = [
     CORE_STATIC_DIR,
 ]
 
-# Use Whitenoise, but the "Compressed" version (not Manifest).
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# [CRITICAL FIX] DISABLE COMPRESSION
+# We use the standard Django storage. This prevents the "FileNotFound" crash
+# when Whitenoise tries to compress a file that was skipped due to duplicates.
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # --- CLOUDINARY CONFIG ---
 CLOUDINARY_STORAGE = {
@@ -116,7 +118,6 @@ JAZZMIN_SETTINGS = {
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
         {"name": "View Site", "url": "/", "new_window": True},
     ],
-    # Icons (FontAwesome)
     "icons": {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
@@ -129,18 +130,10 @@ JAZZMIN_SETTINGS = {
     },
 }
 
-# --- UI TWEAKS (Blue/Teal Mode) ---
 JAZZMIN_UI_TWEAKS = {
-    # 'flatly' is a modern theme where 'primary' is a nice professional Blue/Teal
     "theme": "flatly",   
-    
-    # Navbar: Dark Blue
     "navbar": "navbar-dark", 
-    
-    # Sidebar: Dark with Blue accents
     "sidebar": "sidebar-dark-primary",
-    
-    # Buttons: Use Blue (Primary) instead of Green
     "button_classes": {
         "primary": "btn-primary", 
         "secondary": "btn-secondary",
