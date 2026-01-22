@@ -13,6 +13,9 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
+    # 1. Jazzmin must be ABOVE 'django.contrib.admin'
+    'jazzmin',
+
     'cloudinary_storage',
     'cloudinary',
     'django.contrib.admin',
@@ -99,3 +102,51 @@ CLOUDINARY_STORAGE = {
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# --- JAZZMIN DASHBOARD CONFIG (Blue/Teal Professional Theme) ---
+JAZZMIN_SETTINGS = {
+    "site_title": "Afrikan Kismat Admin",
+    "site_header": "Afrikan Kismat",
+    "site_brand": "Afrikan Kismat",
+    "welcome_sign": "Welcome to the Staff Portal",
+    "copyright": "Afrikan Kismat Expeditions",
+    "search_model": "core.SafariPackage",
+    "topmenu_links": [
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "View Site", "url": "/", "new_window": True},
+    ],
+    # Icons (FontAwesome)
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "core.SafariPackage": "fas fa-paw",
+        "core.Destination": "fas fa-map-marked-alt",
+        "core.Inquiry": "fas fa-envelope",
+        "core.Testimonial": "fas fa-star",
+        "core.Partner": "fas fa-handshake",
+    },
+}
+
+# --- UI TWEAKS (Blue/Teal Mode) ---
+JAZZMIN_UI_TWEAKS = {
+    # 'flatly' is a modern theme where 'primary' is a nice professional Blue/Teal
+    "theme": "flatly",   
+    
+    # Navbar: Dark Blue
+    "navbar": "navbar-dark", 
+    
+    # Sidebar: Dark with Blue accents
+    "sidebar": "sidebar-dark-primary",
+    
+    # Buttons: Use Blue (Primary) instead of Green
+    "button_classes": {
+        "primary": "btn-primary", 
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
+}
