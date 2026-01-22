@@ -1,5 +1,5 @@
 from django.db import models
-from cloudinary.models import CloudinaryField  # <--- Crucial Import
+from cloudinary.models import CloudinaryField
 
 class SafariPackage(models.Model):
     # Basic Info
@@ -43,15 +43,28 @@ class Destination(models.Model):
     def get_highlights_list(self):
         return [h.strip() for h in self.highlights.split(',')]
 
+# --- UPDATED INQUIRY MODEL ---
 class Inquiry(models.Model):
+    # Link the inquiry to a specific package (optional, in case it's a general contact)
+    package = models.ForeignKey(SafariPackage, on_delete=models.SET_NULL, null=True, blank=True, related_name='inquiries')
+    
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    subject = models.CharField(max_length=200, default="General Inquiry")
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    
+    # New Smart Fields
+    travel_date = models.DateField(null=True, blank=True, help_text="Approximate travel date")
+    adults = models.PositiveIntegerField(default=1, help_text="Number of Adults")
+    children = models.PositiveIntegerField(default=0, help_text="Number of Children")
+    
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    is_processed = models.BooleanField(default=False, verbose_name="Handled?")
 
     def __str__(self):
-        return f"{self.name} - {self.subject}"
+        if self.package:
+            return f"Quote: {self.package.title} ({self.name})"
+        return f"General Inquiry: {self.name}"
 
 class Testimonial(models.Model):
     client_name = models.CharField(max_length=100)
