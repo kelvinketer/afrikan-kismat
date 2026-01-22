@@ -22,4 +22,4 @@ python manage.py migrate
 
 # Create Superuser Automatically
 # The "|| true" part ensures the build doesn't fail if the user already exists
-python manage.py createsuperuser --noinput || true
+python manage.py createsuperuser --noinput || true# Trigger auto-deploy test
