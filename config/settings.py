@@ -3,6 +3,8 @@ Django settings for config project.
 """
 
 import os
+import sys
+import django  # Imported to find the exact path of admin files
 import dj_database_url
 from pathlib import Path
 
@@ -29,7 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', # <--- This must be here for the Admin to work
+    'django.contrib.staticfiles',
 
     # --- Local Apps ---
     'core',
@@ -94,18 +96,23 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# [THE CRITICAL FIX]
-# We explicitly tell Django which tools to use to find files.
-# 'AppDirectoriesFinder' is the one that finds the Admin panel styles.
+# 1. Standard Finders
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-# Use the "Forgiving" storage engine (Prevents crashes if files are missing)
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# [THE NUCLEAR FIX]
+# We calculate exactly where Django is installed and force the Admin path.
+DJANGO_ROOT = os.path.dirname(django.__file__)
+ADMIN_STATIC_PATH = os.path.join(DJANGO_ROOT, 'contrib', 'admin', 'static')
 
-# Note: We keep STATICFILES_DIRS removed for now to ensure safety.
+STATICFILES_DIRS = [
+    ADMIN_STATIC_PATH,  # Explicitly points to the admin styles
+]
+
+# Use the "Forgiving" storage engine
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
 # --- CLOUDINARY MEDIA CONFIG (Permanent Images) ---
