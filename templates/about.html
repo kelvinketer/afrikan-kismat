@@ -1,167 +1,223 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Our Story | Afrikan Kismat Expeditions{% endblock %}
+{% block title %}About Us | African Kismat Expeditions{% endblock %}
 
 {% block content %}
 
-<div class="relative h-[50vh] w-full flex items-center justify-center">
-    <div class="absolute inset-0 bg-cover bg-center bg-fixed" 
-         style="background-image: url('https://images.unsplash.com/photo-1549396535-c11d5c55b9df?auto=format&fit=crop&w=1920&q=80');">
+<div class="relative h-[60vh] w-full flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" 
+         style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=80'); background-attachment: fixed;">
          <div class="absolute inset-0 bg-black/60"></div>
     </div>
     
-    <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-        <span class="text-safari-gold font-bold tracking-[0.3em] uppercase text-xs mb-4 block animate-pulse">Who We Are</span>
-        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wide drop-shadow-lg mb-6 font-header">
-            More Than Just <br> A Safari Company
+    <div class="relative z-10 text-center text-white px-4 max-w-5xl mx-auto mt-10">
+        <span class="text-safari-gold font-bold tracking-[0.4em] uppercase text-xs md:text-sm mb-6 block animate-fade-in-up">
+            Our Philosophy
+        </span>
+        <h1 class="text-4xl md:text-7xl font-black uppercase tracking-wide drop-shadow-2xl mb-8 font-header leading-tight">
+            The Essence of Your <br> 
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-safari-clay to-safari-gold">Safari Destiny</span>
         </h1>
-        <p class="text-lg md:text-xl font-medium opacity-90 leading-relaxed">
-            We are a collective of local guides, conservationists, and tech innovators dedicated to showing you the <span class="text-safari-gold italic">real</span> Africa.
+        <div class="w-24 h-1 bg-safari-clay mx-auto rounded-full mb-8"></div>
+        <p class="text-lg md:text-2xl font-light opacity-90 leading-relaxed max-w-3xl mx-auto text-gray-100 italic">
+            "A purposeful encounter shaped by timing, place, and experience."
         </p>
     </div>
 </div>
 
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-            <div>
-                <h2 class="text-3xl font-black text-gray-900 mb-6 font-header uppercase text-safari-clay leading-tight">
-                    We Don't Just Observe Nature, <br> We Protect It.
-                </h2>
-                <div class="w-20 h-1.5 bg-safari-gold mb-8 rounded-full"></div>
-                <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                    Afrikan Kismat Expeditions was born from a simple idea: that tourism should benefit the people and wildlife of East Africa, not just exploit them.
-                </p>
-                <p class="text-gray-600 text-lg leading-relaxed">
-                    Unlike mass-market tour operators, we are <strong>100% locally owned and operated</strong>. Every trip you take with us directly supports local community projects, from water conservation in the Mara to education initiatives in Nairobi.
-                </p>
+<section class="py-24 bg-white relative">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-3xl font-black text-gray-900 mb-10 font-header uppercase tracking-widest relative inline-block">
+            Who We Are
+            <span class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-safari-gold"></span>
+        </h2>
+        
+        <div class="prose prose-lg mx-auto text-gray-600 leading-relaxed">
+            <p class="mb-8">
+                African Kismat Expeditions is a professionally managed safari and travel company based in <strong>Nairobi, Kenya</strong>, specializing in tailor-made and scheduled safari experiences across Kenya and East Africa. We design intelligent, value-driven journeys for travelers who seek authenticity, comfort, and meaningful engagement with Africa’s landscapes, wildlife, and cultures.
+            </p>
+            
+            <p class="mb-10">
+                Our name <strong>Kismat</strong>—meaning <em>destiny</em>—reflects our belief that every journey is more than travel; it is a purposeful encounter. We serve leisure travelers, small groups, families, and corporate clients with a strong focus on ethical tourism, transparent pricing, and reliable operations.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gray-100 pt-12 mt-4">
+            <div class="p-4 group hover:-translate-y-1 transition duration-300">
+                <div class="text-4xl font-black text-safari-clay mb-2 group-hover:text-safari-gold transition">8+</div>
+                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Years Experience</div>
             </div>
-            <div class="grid grid-cols-2 gap-6">
-                <div class="bg-gray-50 p-8 rounded-3xl text-center border border-gray-100 hover:shadow-lg transition duration-300 group">
-                    <div class="text-4xl font-black text-safari-clay mb-2 group-hover:scale-110 transition duration-300">8+</div>
-                    <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Years Experience</div>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-3xl text-center border border-gray-100 hover:shadow-lg transition duration-300 group">
-                    <div class="text-4xl font-black text-safari-clay mb-2 group-hover:scale-110 transition duration-300">100%</div>
-                    <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Local Guides</div>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-3xl text-center border border-gray-100 hover:shadow-lg transition duration-300 group">
-                    <div class="text-4xl font-black text-safari-clay mb-2 group-hover:scale-110 transition duration-300">500+</div>
-                    <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Happy Travelers</div>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-3xl text-center border border-gray-100 hover:shadow-lg transition duration-300 group">
-                    <div class="text-4xl font-black text-safari-clay mb-2 group-hover:scale-110 transition duration-300">5%</div>
-                    <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">Donated to Conservation</div>
-                </div>
+            <div class="p-4 group hover:-translate-y-1 transition duration-300">
+                <div class="text-4xl font-black text-safari-clay mb-2 group-hover:text-safari-gold transition">100%</div>
+                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Local Guides</div>
+            </div>
+            <div class="p-4 group hover:-translate-y-1 transition duration-300">
+                <div class="text-4xl font-black text-safari-clay mb-2 group-hover:text-safari-gold transition">500+</div>
+                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Happy Travelers</div>
+            </div>
+            <div class="p-4 group hover:-translate-y-1 transition duration-300">
+                <div class="text-4xl font-black text-safari-clay mb-2 group-hover:text-safari-gold transition">5%</div>
+                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">For Conservation</div>
             </div>
         </div>
     </div>
 </section>
 
 <section class="py-24 bg-safari-dark text-white relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
 
     <div class="max-w-7xl mx-auto px-6 relative z-10">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-black font-header uppercase tracking-wide">Our Core Values</h2>
-            <div class="w-16 h-1 bg-safari-clay mx-auto mt-6"></div>
+        <div class="text-center mb-20">
+            <span class="text-safari-gold font-bold tracking-[0.2em] uppercase text-xs mb-3 block">Our Core Values</span>
+            <h2 class="text-3xl md:text-5xl font-black font-header uppercase tracking-wide">The Kismat Promise</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div class="bg-white/5 p-10 rounded-2xl border border-white/10 hover:bg-white/10 transition duration-300">
-                <div class="w-14 h-14 bg-safari-clay rounded-full flex items-center justify-center text-white text-2xl mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white/5 p-10 rounded-3xl border border-white/10 hover:bg-white/10 transition duration-300 group">
+                <div class="w-14 h-14 bg-safari-clay rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg group-hover:scale-110 transition">
+                    <i class="fas fa-search-dollar"></i>
+                </div>
+                <h3 class="text-xl font-bold font-header mb-4 text-white">Transparent Pricing</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Honest pricing with no hidden costs. We believe in complete transparency so you know exactly where your money goes.
+                </p>
+            </div>
+
+            <div class="bg-white/5 p-10 rounded-3xl border border-white/10 hover:bg-white/10 transition duration-300 group">
+                <div class="w-14 h-14 bg-safari-clay rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg group-hover:scale-110 transition">
+                    <i class="fas fa-id-card-alt"></i>
+                </div>
+                <h3 class="text-xl font-bold font-header mb-4 text-white">Licensed Guides</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Our guides are licensed professionals with deep local knowledge, ensuring your safety and an enriching experience.
+                </p>
+            </div>
+
+            <div class="bg-white/5 p-10 rounded-3xl border border-white/10 hover:bg-white/10 transition duration-300 group">
+                <div class="w-14 h-14 bg-safari-clay rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg group-hover:scale-110 transition">
+                    <i class="fas fa-truck-pickup"></i>
+                </div>
+                <h3 class="text-xl font-bold font-header mb-4 text-white">Quality Vehicles</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    We use well-maintained 4x4 safari Land Cruisers and vans to ensure comfort on rugged African terrain.
+                </p>
+            </div>
+
+            <div class="bg-white/5 p-10 rounded-3xl border border-white/10 hover:bg-white/10 transition duration-300 group">
+                <div class="w-14 h-14 bg-safari-clay rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg group-hover:scale-110 transition">
                     <i class="fas fa-hand-holding-heart"></i>
                 </div>
-                <h3 class="text-xl font-bold font-header mb-4">Community First</h3>
-                <p class="text-gray-400 leading-relaxed">
-                    We believe safari tourism must empower locals. We hire exclusively from local communities and ensure fair wages for all staff.
+                <h3 class="text-xl font-bold font-header mb-4 text-white">Sustainable Tourism</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    We are committed to responsible travel that respects wildlife and empowers local communities.
                 </p>
             </div>
 
-            <div class="bg-white/5 p-10 rounded-2xl border border-white/10 hover:bg-white/10 transition duration-300">
-                <div class="w-14 h-14 bg-safari-clay rounded-full flex items-center justify-center text-white text-2xl mb-6">
-                    <i class="fas fa-leaf"></i>
+            <div class="bg-white/5 p-10 rounded-3xl border border-white/10 hover:bg-white/10 transition duration-300 group">
+                <div class="w-14 h-14 bg-safari-clay rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg group-hover:scale-110 transition">
+                    <i class="fas fa-headset"></i>
                 </div>
-                <h3 class="text-xl font-bold font-header mb-4">Sustainability</h3>
-                <p class="text-gray-400 leading-relaxed">
-                    Leave no trace. We partner with eco-friendly lodges and practice strict waste management to keep our parks pristine for generations.
+                <h3 class="text-xl font-bold font-header mb-4 text-white">End-to-End Support</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    From your first email to your flight home, our team provides 24/7 support to ensure a seamless journey.
                 </p>
             </div>
 
-            <div class="bg-white/5 p-10 rounded-2xl border border-white/10 hover:bg-white/10 transition duration-300">
-                <div class="w-14 h-14 bg-safari-clay rounded-full flex items-center justify-center text-white text-2xl mb-6">
-                    <i class="fas fa-binoculars"></i>
+            <div class="bg-white/5 p-10 rounded-3xl border border-white/10 hover:bg-white/10 transition duration-300 group">
+                <div class="w-14 h-14 bg-safari-clay rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg group-hover:scale-110 transition">
+                    <i class="fas fa-handshake"></i>
                 </div>
-                <h3 class="text-xl font-bold font-header mb-4">Authenticity</h3>
-                <p class="text-gray-400 leading-relaxed">
-                    No "tourist traps." We take you off the beaten path to experience the raw, unfiltered beauty of the African bush.
+                <h3 class="text-xl font-bold font-header mb-4 text-white">Local Partnerships</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    We partner with reputable lodges and conservation initiatives to guarantee service excellence.
                 </p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-24 bg-safari-sand">
+<section class="py-24 bg-gray-50" id="pricing">
     <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-16">
-            <span class="text-safari-clay font-bold tracking-[0.2em] uppercase text-xs">The Visionaries</span>
-            <h2 class="text-3xl font-black text-gray-900 mt-2 font-header uppercase">Meet The Founders</h2>
+            <h2 class="text-3xl font-black text-gray-900 uppercase font-header tracking-widest">Safari Pricing Structure</h2>
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto italic text-lg font-light">
+                Indicative rates per person / day. Final rates vary based on season, destination, and customization.
+            </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg group">
-                <div class="h-80 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&w=800&q=80" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500 grayscale group-hover:grayscale-0">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+            
+            <div class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-500 relative group">
+                <div class="bg-gray-100 py-6 text-center border-b border-gray-200">
+                    <h3 class="text-gray-800 font-bold uppercase tracking-[0.2em] text-sm">Silver Path</h3>
                 </div>
-                <div class="p-8 text-center">
-                    <h3 class="text-xl font-bold text-gray-900 font-header">Kelvin Keter</h3>
-                    <p class="text-safari-clay text-xs font-bold uppercase tracking-widest mt-1">Co-Founder & Tech Lead</p>
-                    <p class="text-gray-500 text-sm mt-4 italic">
-                        "Merging technology with wildlife conservation to create seamless, impactful African adventures."
-                    </p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg group">
-                <div class="h-80 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500 grayscale group-hover:grayscale-0">
-                </div>
-                <div class="p-8 text-center">
-                    <h3 class="text-xl font-bold text-gray-900 font-header">Felex Simiyu</h3>
-                    <p class="text-safari-clay text-xs font-bold uppercase tracking-widest mt-1">Co-Founder & Operations</p>
-                    <p class="text-gray-500 text-sm mt-4 italic">
-                        "Dedicated to ensuring every expedition we curate is safe, authentic, and unforgettable."
-                    </p>
+                <div class="p-10 text-center">
+                    <div class="text-4xl font-black text-gray-800 mb-2 font-header">$280 – $400</div>
+                    <p class="text-[10px] text-gray-400 mb-8 uppercase tracking-widest font-bold">USD per person / day</p>
+                    
+                    <ul class="text-left space-y-5 mb-10 text-sm text-gray-600 font-medium">
+                        <li class="flex gap-4 items-center"><i class="fas fa-campground text-safari-green text-lg"></i> Budget Eco-Camps</li>
+                        <li class="flex gap-4 items-center"><i class="fas fa-users text-safari-green text-lg"></i> Group Safaris</li>
+                        <li class="flex gap-4 items-center"><i class="fas fa-hiking text-safari-green text-lg"></i> Authentic Adventure</li>
+                        <li class="flex gap-4 items-center"><i class="fas fa-shuttle-van text-safari-green text-lg"></i> Pop-up Roof Van</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="block w-full py-4 border-2 border-gray-900 text-gray-900 font-bold uppercase text-xs rounded-xl hover:bg-gray-900 hover:text-white transition tracking-widest">Inquire Silver</a>
                 </div>
             </div>
 
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg group">
-                <div class="h-80 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500 grayscale group-hover:grayscale-0">
+            <div class="bg-white rounded-3xl shadow-2xl border-2 border-safari-gold overflow-hidden transform md:-translate-y-6 relative z-10">
+                <div class="bg-safari-gold py-2 text-center text-[10px] font-black text-white uppercase tracking-wider">Most Popular Choice</div>
+                <div class="bg-safari-dark py-6 text-center">
+                    <h3 class="text-white font-bold uppercase tracking-[0.2em] text-sm">Gold Horizon</h3>
                 </div>
-                <div class="p-8 text-center">
-                    <h3 class="text-xl font-bold text-gray-900 font-header">Sarah Wanjiku</h3>
-                    <p class="text-safari-clay text-xs font-bold uppercase tracking-widest mt-1">Lead Safari Guide</p>
-                    <p class="text-gray-500 text-sm mt-4 italic">
-                        "The bush is my home. I live to share the hidden stories of the Maasai Mara with the world."
-                    </p>
+                <div class="p-10 text-center">
+                    <div class="text-5xl font-black text-safari-clay mb-2 font-header">$400 – $600</div>
+                    <p class="text-[10px] text-gray-400 mb-8 uppercase tracking-widest font-bold">USD per person / day</p>
+                    
+                    <ul class="text-left space-y-5 mb-10 text-sm text-gray-600 font-medium">
+                        <li class="flex gap-4 items-center"><i class="fas fa-hotel text-safari-gold text-lg"></i> Mid-Range Lodges</li>
+                        <li class="flex gap-4 items-center"><i class="fas fa-car text-safari-gold text-lg"></i> Private 4x4 Jeep</li>
+                        <li class="flex gap-4 items-center"><i class="fas fa-wine-glass text-safari-gold text-lg"></i> Comfort & Style</li>
+                        <li class="flex gap-4 items-center"><i class="fas fa-user-tie text-safari-gold text-lg"></i> Expert Private Guide</li>
+                    </ul>
+
+                    <a href="{% url 'contact' %}" class="block w-full py-5 bg-safari-clay text-white font-bold uppercase text-xs rounded-xl hover:bg-safari-dark transition shadow-xl tracking-widest hover:scale-105 transform">Start Planning Gold</a>
                 </div>
             </div>
+
+            <div class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-500 relative group">
+                <div class="bg-gray-100 py-6 text-center border-b border-gray-200">
+                    <h3 class="text-gray-800 font-bold uppercase tracking-[0.2em] text-sm">Platinum Destiny</h3>
+                </div>
+                <div class="p-10 text-center">
+                    <div class="text-4xl font-black text-gray-800 mb-2 font-header">$700 – $950+</div>
+                    <p class="text-[10px] text-gray-400 mb-8 uppercase tracking-widest font-bold">USD per person / day</p>
+                    
+                    <ul class="text-left space-y-5 mb-10 text-sm text-gray-600 font-medium">
+                        <li class="flex gap-4 items-center"><i class="fas fa-star text-safari-green text-lg"></i> Luxury Lodges</li>
+                        <li class="flex gap-4 items-center"><i class="fas fa-plane text-safari-green text-lg"></i> Flight Safaris</li>
+                        <li class="flex gap-4 items-center"><i class="fas fa-concierge-bell text-safari-green text-lg"></i> Exclusive Services</li>
+                        <li class="flex gap-4 items-center"><i class="fas fa-gem text-safari-green text-lg"></i> Premium 4x4 Cruiser</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="block w-full py-4 border-2 border-gray-900 text-gray-900 font-bold uppercase text-xs rounded-xl hover:bg-gray-900 hover:text-white transition tracking-widest">Inquire Platinum</a>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
 
-<section class="py-20 bg-safari-clay text-white text-center">
-    <div class="max-w-4xl mx-auto px-6">
-        <h2 class="text-3xl md:text-4xl font-black mb-6 font-header uppercase">Ready to join the family?</h2>
-        <p class="text-lg opacity-90 mb-10">
-            Let's start planning your dream safari today. No obligation, just expert advice.
+<section class="py-24 bg-safari-clay text-white text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/10"></div>
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+        <h2 class="text-3xl md:text-5xl font-black mb-8 font-header uppercase leading-tight">Ready to fulfill your<br>Safari Destiny?</h2>
+        <p class="text-xl opacity-90 mb-12 font-light max-w-2xl mx-auto">
+            Let's start planning your dream safari today. No obligation, just expert advice from our local team in Nairobi.
         </p>
-        <a href="{% url 'contact' %}" class="bg-white text-safari-clay px-10 py-4 rounded-full font-bold uppercase tracking-wider hover:bg-safari-dark hover:text-white transition shadow-xl">
+        <a href="{% url 'contact' %}" class="inline-block bg-white text-safari-clay px-12 py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-safari-dark hover:text-white transition shadow-2xl hover:scale-105 transform duration-300">
             Contact Us Now
         </a>
     </div>
