@@ -43,7 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # <--- Crucial: Must stay here for static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # <--- Crucial: Must stay here
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -57,7 +57,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')], # Updated to absolute path
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,19 +118,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Using absolute paths for Render's Linux environment
+# UPDATED: Explicitly point to core/static where your logo lives
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'core', 'static'),
 ]
 
-# Explicit finders help WhiteNoise locate the admin and app files
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-]
-
-# Use the "Forgiving" storage engine to prevent 500 errors if a file is missing
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# UPDATED: Use Manifest storage for better caching and reliability
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # --- CLOUDINARY MEDIA CONFIG (Permanent Images) ---
@@ -147,5 +141,4 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # --- MISC FIXES ---
 
-# Fixes the primary key warnings in the logs
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
