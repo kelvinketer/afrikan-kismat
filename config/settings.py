@@ -3,20 +3,18 @@ Django settings for config project.
 """
 
 import os
-import sys
-import django
 import dj_database_url
 from pathlib import Path
 
-# Build paths
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Security
+# Quick-start development settings
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dl)5blh(x9o$fp_jo3(0wktx(hm)u$7^u#eg+kyfc!n#(w(*xy')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = ['*']
 
-# Apps
+# Application definition
 INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
@@ -25,13 +23,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', # Crucial for AppDirectoriesFinder
     'core',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware', # DISABLED for now to test raw copy
+    'whitenoise.middleware.WhiteNoiseMiddleware', # Re-enabled for production speed
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,33 +78,31 @@ USE_I18N = True
 USE_TZ = True
 
 
-# --- STATIC FILES CONFIG (SNIPER MODE) ---
+# --- STATIC FILES CONFIG (GOLDILOCKS STANDARD) ---
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# 1. Define Paths
+# 1. Ensure the local static folder exists to prevent errors
 CORE_STATIC_DIR = os.path.join(BASE_DIR, 'core', 'static')
 if not os.path.exists(CORE_STATIC_DIR):
     os.makedirs(CORE_STATIC_DIR)
 
-DJANGO_ROOT = os.path.dirname(django.__file__)
-ADMIN_STATIC_PATH = os.path.join(DJANGO_ROOT, 'contrib', 'admin', 'static')
-
-# 2. Force Django to look here
+# 2. Tell Django to look in our local folder
 STATICFILES_DIRS = [
     CORE_STATIC_DIR,
-    ADMIN_STATIC_PATH, 
 ]
 
-# 3. CRITICAL: ONLY use FileSystemFinder
-# We removed 'AppDirectoriesFinder'. This prevents the "Duplicate/Ignored" error.
+# 3. USE STANDARD FINDERS
+# 'AppDirectoriesFinder' is what finds the Admin files automatically.
+# We proved earlier that this works (it found duplicates).
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-# 4. Use Basic Storage (No Compression)
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# 4. Use Whitenoise with the forgiving setting
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
 # --- CLOUDINARY CONFIG ---
