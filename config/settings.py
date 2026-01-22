@@ -118,10 +118,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# [REMOVED] STATICFILES_DIRS is deleted to prevent "directory not found" errors.
+# [THE FIX] Explicitly tell Django how to find files.
+# 'AppDirectoriesFinder' is what finds the Admin styles.
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 
-# Use the "Forgiving" storage engine
+# Use the "Forgiving" storage engine to prevent crashes if a file is missing
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+# Note: STATICFILES_DIRS is deliberately removed to prevent "directory not found" errors.
 
 
 # --- CLOUDINARY MEDIA CONFIG (Permanent Images) ---
