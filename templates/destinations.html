@@ -1,43 +1,110 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Destinations | Afrikan Kismat Expeditions{% endblock %}
+{% block title %}Destinations | African Kismat Expeditions{% endblock %}
 
 {% block content %}
 
-<div class="relative py-24 bg-gray-900">
-    <div class="absolute inset-0 bg-cover bg-center opacity-50" 
-         style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920');"></div>
-    <div class="relative z-10 text-center text-white px-6">
-        <h1 class="text-4xl md:text-5xl font-bold uppercase tracking-widest mb-4 font-header">Our Destinations</h1>
-        <p class="text-xl max-w-2xl mx-auto text-gray-200 font-light">From the savannahs to the sea.</p>
+<div class="relative h-[60vh] w-full flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1547471080-7541f6a15325?auto=format&fit=crop&q=80');">
+        <div class="absolute inset-0 bg-black/50"></div>
+    </div>
+    <div class="relative z-10 text-center text-white px-4 max-w-5xl mx-auto mt-16">
+        <span class="text-safari-gold font-bold tracking-[0.3em] uppercase text-xs mb-4 block animate-pulse">
+            Where to Go
+        </span>
+        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wide drop-shadow-lg mb-6 font-header">
+            Kenya's Favourite <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-safari-clay to-safari-gold">Destinations</span>
+        </h1>
+        <p class="text-lg md:text-xl font-medium opacity-90 leading-relaxed max-w-2xl mx-auto text-gray-100">
+            Explore the diverse landscapes of East Africa.
+        </p>
     </div>
 </div>
 
-<section class="py-20 bg-white">
+<section class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            
+            <div class="flex gap-6">
+                <div class="w-12 h-12 rounded-full bg-safari-clay/10 flex items-center justify-center shrink-0 text-safari-clay text-xl">
+                    <i class="fas fa-paw"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3 uppercase tracking-wider">Classic Wildlife Safaris</h3>
+                    <ul class="space-y-3 text-sm text-gray-600 leading-relaxed">
+                        <li><strong class="text-safari-clay">Maasai Mara:</strong> Home of the Great Wildebeest Migration & Big Five.</li>
+                        <li><strong class="text-safari-clay">Amboseli:</strong> Large elephant herds & views of Mount Kilimanjaro.</li>
+                        <li><strong class="text-safari-clay">Samburu:</strong> Unique northern wildlife species & cultural encounters.</li>
+                        <li><strong class="text-safari-clay">Tsavo East & West:</strong> Vast wilderness & red elephants.</li>
+                        <li><strong class="text-safari-clay">Lake Nakuru:</strong> Renowned rhino sanctuary & rich birdlife.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex gap-6">
+                <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center shrink-0 text-green-700 text-xl">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3 uppercase tracking-wider">Highlands & Adventure</h3>
+                    <ul class="space-y-3 text-sm text-gray-600 leading-relaxed">
+                        <li><strong class="text-green-700">Aberdare National Park:</strong> Forested mountains, waterfalls & scenic lodges.</li>
+                        <li><strong class="text-green-700">Mount Kenya Region:</strong> Alpine landscapes, hiking & wellness retreats.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex gap-6">
+                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center shrink-0 text-blue-600 text-xl">
+                    <i class="fas fa-water"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3 uppercase tracking-wider">Lakes & Islands</h3>
+                    <ul class="space-y-3 text-sm text-gray-600 leading-relaxed">
+                        <li><strong class="text-blue-600">Rusinga Island:</strong> Cultural heritage & tranquil sunsets (Lake Victoria).</li>
+                        <li><strong class="text-blue-600">Takawiri Island:</strong> Exclusive white-sand island retreat.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex gap-6">
+                <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center shrink-0 text-yellow-600 text-xl">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3 uppercase tracking-wider">Coastal Experiences</h3>
+                    <ul class="space-y-3 text-sm text-gray-600 leading-relaxed">
+                        <li><strong class="text-yellow-600">Wasini Island:</strong> Dhow sailing, snorkeling & dolphin watching.</li>
+                        <li><strong class="text-yellow-600">South Coast:</strong> Swahili culture & Kisite–Mpunguti Marine Park.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 bg-safari-light border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-2xl font-bold text-gray-900 mb-10 font-header uppercase tracking-wider text-center">Featured Destinations</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             {% for dest in destinations %}
-            <a href="{% url 'destination_detail' dest.slug %}" class="group block relative h-96 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
-                <img src="{{ dest.image_url }}" alt="{{ dest.name }}" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
-                
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
-                
-                <div class="absolute bottom-0 left-0 p-8 w-full">
-                    <div class="translate-y-4 group-hover:translate-y-0 transition duration-500">
-                        <h3 class="text-2xl font-bold text-white mb-2 font-header uppercase">{{ dest.name }}</h3>
-                        <p class="text-safari-gold text-sm font-bold tracking-widest uppercase mb-4">{{ dest.subtitle }}</p>
-                        
-                        <div class="opacity-0 group-hover:opacity-100 transition duration-500 delay-100">
-                            <span class="inline-block border border-white/30 text-white text-xs px-4 py-2 rounded-full hover:bg-safari-clay hover:border-safari-clay transition">
-                                Explore <i class="fas fa-arrow-right ml-2"></i>
-                            </span>
-                        </div>
-                    </div>
+            <a href="{% url 'destination_detail' dest.slug %}" class="group block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition transform hover:-translate-y-1">
+                <div class="h-64 overflow-hidden relative">
+                    <img src="{{ dest.image_url }}" alt="{{ dest.name }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80"></div>
+                    <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold uppercase tracking-wide">{{ dest.name }}</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-safari-clay text-xs font-bold uppercase tracking-widest mb-2">{{ dest.subtitle }}</p>
+                    <p class="text-gray-600 text-sm line-clamp-3">{{ dest.description }}</p>
                 </div>
             </a>
             {% empty %}
-            <div class="col-span-3 text-center py-20">
-                <p class="text-gray-500 text-lg">Destinations are being curated. Check back soon.</p>
+            <div class="col-span-3 text-center text-gray-500 py-12">
+                <i class="fas fa-map-marked-alt text-4xl mb-4 text-gray-300"></i>
+                <p>Destinations are being curated. Check back soon!</p>
             </div>
             {% endfor %}
         </div>

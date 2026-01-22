@@ -1,28 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Tour Safaris | Afrikan Kismat Expeditions{% endblock %}
+{% block title %}Safaris | African Kismat Expeditions{% endblock %}
 
 {% block content %}
 
-<div class="relative h-[60vh] w-full flex items-center justify-center">
-    <div class="absolute inset-0 bg-cover bg-center" 
-         style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=80');">
-         <div class="absolute inset-0 bg-black/50"></div>
+<div class="relative h-[60vh] w-full flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1519095616917-650c820d9815?auto=format&fit=crop&w=1920&q=80');">
+        <div class="absolute inset-0 bg-black/50"></div>
     </div>
-    
-    <div class="relative z-10 text-center text-white px-4">
-        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wide drop-shadow-lg mb-4 font-header">
-            Our Safari Packages
+    <div class="relative z-10 text-center text-white px-4 max-w-5xl mx-auto mt-16">
+        <span class="text-safari-gold font-bold tracking-[0.3em] uppercase text-xs mb-4 block animate-pulse">
+            Curated Itineraries
+        </span>
+        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wide drop-shadow-lg mb-6 font-header">
+            Signature <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-safari-clay to-safari-gold">Safari Packages</span>
         </h1>
-        <p class="text-lg md:text-xl font-medium max-w-2xl mx-auto opacity-90">
-            Hand-picked itineraries designed to show you the best of East Africa.
+        <p class="text-lg md:text-xl font-medium opacity-90 leading-relaxed max-w-2xl mx-auto text-gray-100">
+            Hand-picked adventures designed for families, photographers, and thrill-seekers.
         </p>
     </div>
 </div>
 
-<section class="py-16 bg-white text-center px-6">
+<section class="py-16 bg-white text-center px-6 border-b border-gray-100">
     <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-black text-gray-800 mb-6 font-header uppercase text-safari-clay">
+        <h2 class="text-3xl font-black text-gray-900 mb-6 font-header uppercase tracking-wider text-safari-clay">
             Tailor-Made Adventures
         </h2>
         <p class="text-gray-600 text-lg leading-relaxed">
@@ -33,19 +35,18 @@
     </div>
 </section>
 
-<section class="pb-24 bg-gray-50 px-6 pt-10">
+<section class="py-24 bg-safari-light px-6">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
 
         {% for safari in safaris %}
         <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 group flex flex-col border border-gray-100">
             
             <div class="h-64 overflow-hidden relative">
-                <img src="{{ safari.image_url }}" 
-                     class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                <img src="{{ safari.image_url }}" alt="{{ safari.title }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                 
                 {% if safari.is_popular %}
-                <div class="absolute top-4 left-4 bg-safari-clay text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
-                    Most Popular
+                <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-safari-clay text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                    Best Seller
                 </div>
                 {% endif %}
                 
@@ -57,12 +58,16 @@
             </div>
 
             <div class="p-8 flex flex-col flex-grow">
-                <div class="flex justify-between items-center mb-3">
-                    <span class="text-xs font-bold text-gray-400 uppercase tracking-widest"><i class="far fa-clock text-safari-clay mr-1"></i> {{ safari.duration_text }}</span>
-                    <span class="text-safari-green font-bold text-xs uppercase"><i class="fas fa-map-marker-alt mr-1"></i> {{ safari.location }}</span>
+                <div class="flex justify-between items-center mb-4 text-xs font-bold text-gray-400 uppercase tracking-widest">
+                    <span class="flex items-center gap-1">
+                        <i class="far fa-clock text-safari-clay"></i> {{ safari.duration_text }}
+                    </span>
+                    <span class="flex items-center gap-1">
+                        <i class="fas fa-map-marker-alt text-safari-clay"></i> {{ safari.location }}
+                    </span>
                 </div>
                 
-                <h3 class="text-2xl font-black text-gray-900 mb-4 font-header group-hover:text-safari-clay transition leading-tight">
+                <h3 class="text-2xl font-bold text-gray-900 mb-3 font-header group-hover:text-safari-clay transition leading-tight">
                     {{ safari.title }}
                 </h3>
                 
@@ -72,10 +77,13 @@
                 
                 <div class="mt-auto pt-6 border-t border-gray-100">
                     {% if safari.price_guideline %}
-                    <p class="text-xs text-gray-400 mb-4 font-bold">Starting from <span class="text-lg text-safari-dark">{{ safari.price_guideline }}</span></p>
+                    <p class="text-xs text-gray-400 mb-4 font-bold flex justify-between items-center">
+                        <span>Starting from</span>
+                        <span class="text-lg text-safari-dark font-black">{{ safari.price_guideline }}</span>
+                    </p>
                     {% endif %}
                     
-                    <a href="{% url 'safari_detail' safari.pk %}" class="block text-center bg-gray-50 border border-gray-200 text-gray-900 font-bold py-3 rounded-xl hover:bg-safari-clay hover:text-white hover:border-safari-clay transition uppercase text-xs tracking-widest shadow-sm">
+                    <a href="{% url 'safari_detail' safari.pk %}" class="block text-center bg-gray-50 border border-gray-200 text-gray-900 font-bold py-4 rounded-xl hover:bg-safari-clay hover:text-white hover:border-safari-clay transition uppercase text-xs tracking-widest shadow-sm group-hover:shadow-lg">
                         View Itinerary
                     </a>
                 </div>
