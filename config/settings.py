@@ -3,6 +3,8 @@ Django settings for config project.
 """
 
 import os
+import sys
+import django
 import dj_database_url
 from pathlib import Path
 
@@ -78,27 +80,31 @@ USE_I18N = True
 USE_TZ = True
 
 
-# --- STATIC FILES CONFIG (The Final Fix) ---
+# --- STATIC FILES CONFIG (FORCE MODE) ---
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# 1. Define where your local custom styles live
-CORE_STATIC_DIR = os.path.join(BASE_DIR, 'core', 'static')
+# 1. Calculate the exact path to Django Admin files
+DJANGO_ROOT = os.path.dirname(django.__file__)
+ADMIN_STATIC_PATH = os.path.join(DJANGO_ROOT, 'contrib', 'admin', 'static')
 
-# 2. AUTO-FIX: Create the folder if it doesn't exist (Fixes "Missing Directory" error)
+# 2. Define your local static folder
+CORE_STATIC_DIR = os.path.join(BASE_DIR, 'core', 'static')
 if not os.path.exists(CORE_STATIC_DIR):
     os.makedirs(CORE_STATIC_DIR)
 
-# 3. Tell Django to look there
+# 3. Add BOTH to the explicit directories list
 STATICFILES_DIRS = [
-    CORE_STATIC_DIR,
+    ADMIN_STATIC_PATH,  # Force Django to see Admin files here
+    CORE_STATIC_DIR,    # Force Django to see your local files here
 ]
 
-# 4. Explicit Finders (Ensures Admin files are found)
+# 4. [CRITICAL] Disable the automatic 'AppDirectoriesFinder'
+# We ONLY use 'FileSystemFinder'. This stops the "Duplicate" warnings
+# and forces Django to copy exactly what is in STATICFILES_DIRS.
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
 # 5. Storage Engine
