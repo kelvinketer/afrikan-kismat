@@ -25,7 +25,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',  # DISABLED TEMPORARILY
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,7 +77,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Ensure core/static exists
+# Ensure core/static exists (Created by our script)
 CORE_STATIC_DIR = os.path.join(BASE_DIR, 'core', 'static')
 if not os.path.exists(CORE_STATIC_DIR):
     os.makedirs(CORE_STATIC_DIR)
@@ -86,7 +86,9 @@ STATICFILES_DIRS = [
     CORE_STATIC_DIR,
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# [CRITICAL FIX] Use the default Django storage.
+# This ignores conflicts and just copies the files.
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # --- CLOUDINARY CONFIG ---
 CLOUDINARY_STORAGE = {
