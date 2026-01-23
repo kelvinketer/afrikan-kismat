@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Custom Apps
     'core',
     'payments',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -178,4 +179,4 @@ EMAIL_USE_TLS = True
 # Securely read credentials from Environment Variables
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = 'Afrikan Kismat <bookings@afrikankismat.com>'
+DEFAULT_FROM_EMAIL = 'Afrikan Kismat <bookings@afrikankismat.com>'          

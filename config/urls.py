@@ -22,4 +22,6 @@ urlpatterns = [
 
     # PAYMENTS APP (This is the new line connecting M-Pesa)
     path('payments/', include('payments.urls')),
+    
+    path('blog/', include('blog.urls')),
 ]
