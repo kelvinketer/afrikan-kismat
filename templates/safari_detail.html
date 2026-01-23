@@ -31,7 +31,7 @@
                 <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-8 rounded shadow-sm flex items-start gap-3">
                     <i class="fas fa-check-circle text-green-500 mt-1"></i>
                     <div>
-                        <p class="font-bold text-green-800">Request Received!</p>
+                        <p class="font-bold text-green-800">Status Update</p>
                         <p class="text-green-700 text-sm">{{ message }}</p>
                     </div>
                 </div>
@@ -117,42 +117,46 @@
 
         <div class="lg:col-span-1">
             <div class="sticky top-24 bg-white p-8 rounded-3xl shadow-xl border-t-8 border-safari-clay">
+                
                 <div class="mb-6 text-center">
-                    <span class="text-gray-500 text-xs font-bold uppercase tracking-widest">Starting from</span>
-                    {% if safari.price_guideline %}
-                    <div class="text-3xl font-black text-gray-900 font-header">{{ safari.price_guideline }}</div>
-                    {% else %}
-                    <div class="text-3xl font-black text-gray-900 font-header">Request Quote</div>
-                    {% endif %}
-                    <span class="text-[10px] text-gray-400 font-bold uppercase">per person sharing</span>
+                    <span class="text-gray-500 text-xs font-bold uppercase tracking-widest">Price Per Person</span>
+                    <div class="text-3xl font-black text-gray-900 font-header">${{ safari.price_usd }}</div>
+                    
+                    <span class="text-[10px] text-green-600 font-bold uppercase">
+                        approx. KES {% widthratio safari.price_usd 1 132 %}
+                    </span>
                 </div>
 
                 <hr class="border-gray-100 mb-6">
 
-                <h3 class="text-lg font-bold text-gray-900 mb-4 text-center uppercase font-header">Request a Quote</h3>
+                <h3 class="text-lg font-bold text-gray-900 mb-4 text-center uppercase font-header">
+                    Book Instantly
+                </h3>
                 
-                <form method="post" class="space-y-4">
+                <form action="{% url 'book_safari' safari.pk %}" method="post" class="space-y-4">
                     {% csrf_token %}
-                    <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Your Name</label>{{ form.name }}</div>
-                    <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Email Address</label>{{ form.email }}</div>
-                    <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Phone / WhatsApp</label>{{ form.phone }}</div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Adults</label>{{ form.adults }}</div>
-                        <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Children</label>{{ form.children }}</div>
+                    
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">M-Pesa Phone Number</label>
+                        <input type="text" name="phone" placeholder="07..." required
+                               class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:border-green-500 outline-none">
                     </div>
-                    <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Travel Date</label>{{ form.travel_date }}</div>
-                    <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Message / Interests</label>{{ form.message }}</div>
 
-                    <button type="submit" class="w-full bg-safari-clay text-white font-bold py-4 rounded-xl uppercase tracking-widest text-xs hover:bg-safari-dark transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                        Send Inquiry
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Number of Travelers</label>
+                        <input type="number" name="travelers" value="1" min="1" required
+                               class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:border-green-500 outline-none">
+                    </div>
+
+                    <button type="submit" class="w-full bg-green-600 text-white font-bold py-4 rounded-xl uppercase tracking-widest text-xs hover:bg-green-700 transition shadow-lg flex justify-center items-center gap-2">
+                        <i class="fas fa-mobile-alt"></i> Pay with M-Pesa
                     </button>
                     
                     <p class="text-center text-[10px] text-gray-400 mt-4">
-                        <i class="fas fa-lock"></i> Your details are secure. We reply within 24hrs.
+                        <i class="fas fa-lock"></i> Secure Payment by Safaricom
                     </p>
                 </form>
-                
-                </div>
+            </div>
         </div>
 
     </div>

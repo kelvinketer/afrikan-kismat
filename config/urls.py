@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include  # <--- Added 'include' here
 from core import views  # Import views from your core app
 
 urlpatterns = [
@@ -17,6 +17,9 @@ urlpatterns = [
     # Detail Pages
     path('destination/<slug:slug>/', views.destination_detail, name='destination_detail'),
     
-    # NEW: The Safari Detail Page (using the Database ID 'pk')
+    # Safari Detail Page
     path('safari/<int:pk>/', views.safari_detail, name='safari_detail'),
+
+    # PAYMENTS APP (This is the new line connecting M-Pesa)
+    path('payments/', include('payments.urls')),
 ]

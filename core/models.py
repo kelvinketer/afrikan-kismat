@@ -13,6 +13,10 @@ class SafariPackage(models.Model):
     # Details
     description = models.TextField()
     price_guideline = models.CharField(max_length=100, blank=True, help_text="e.g. From $400 pp")
+
+    # --- NEW FIELD FOR PAYMENTS ---
+    price_usd = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, help_text="Price per person in USD")
+    # ------------------------------
     
     # Badges (Checkboxes in Admin)
     is_popular = models.BooleanField(default=False, verbose_name="Mark as Most Popular")

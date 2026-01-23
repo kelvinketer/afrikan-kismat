@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="min-h-[60vh] flex items-center justify-center bg-gray-50 py-20">
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-200">
+        <div class="text-center mb-8">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" class="h-12 mx-auto mb-4">
+            <h1 class="text-2xl font-black text-gray-900 uppercase">Test Payment</h1>
+            <p class="text-gray-500 text-sm">Enter your phone number to receive a PIN popup.</p>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+            <div class="p-4 mb-4 rounded-lg text-sm font-bold 
+                {% if message.tags == 'success' %}bg-green-100 text-green-700{% else %}bg-red-100 text-red-700{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" class="space-y-6">
+            {% csrf_token %}
+            
+            <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Phone Number</label>
+                <input type="text" name="phone" placeholder="e.g. 0712345678" 
+                       class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-green-500 transition">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Amount (KES)</label>
+                <input type="number" name="amount" value="1" readonly
+                       class="w-full bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 text-gray-500 cursor-not-allowed">
+                <p class="text-[10px] text-gray-400 mt-1">Fixed to KES 1 for testing.</p>
+            </div>
+
+            <button type="submit" class="w-full bg-green-600 text-white font-bold py-4 rounded-xl hover:bg-green-700 transition shadow-lg flex justify-center items-center gap-2">
+                <i class="fas fa-mobile-alt"></i> Send to Phone
+            </button>
+        </form>
+        
+        <div class="mt-6 text-center">
+             <a href="{% url 'home' %}" class="text-gray-400 text-xs hover:text-gray-600">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

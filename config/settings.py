@@ -2,22 +2,9 @@
 Django settings for config project.
 """
 import os
-from dotenv import load_dotenv
-
-load_dotenv() # Load variables from .env file
-
-# ... existing code ...
-
-# Add these at the bottom of settings.py
-MPESA_CONSUMER_KEY = os.getenv('MPESA_CONSUMER_KEY')
-MPESA_CONSUMER_SECRET = os.getenv('MPESA_CONSUMER_SECRET')
-MPESA_PASSKEY = os.getenv('MPESA_PASSKEY')
-MPESA_SHORTCODE = os.getenv('MPESA_SHORTCODE')
-
-import os
 import dj_database_url
 from pathlib import Path
-from dotenv import load_dotenv # <--- IMPORT THIS
+from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv() 
@@ -44,7 +31,7 @@ INSTALLED_APPS = [
     
     # Custom Apps
     'core',
-    'payments', # <--- NEW APP REGISTERED HERE
+    'payments',
 ]
 
 MIDDLEWARE = [
@@ -110,9 +97,7 @@ STATICFILES_DIRS = [
     CORE_STATIC_DIR,
 ]
 
-# [CRITICAL FIX] DISABLE COMPRESSION
-# We use the standard Django storage. This prevents the "FileNotFound" crash
-# when Whitenoise tries to compress a file that was skipped due to duplicates.
+# DISABLE COMPRESSION to prevent WhiteNoise errors
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # --- CLOUDINARY CONFIG ---
@@ -125,7 +110,7 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# --- JAZZMIN DASHBOARD CONFIG (Blue/Teal Professional Theme) ---
+# --- JAZZMIN DASHBOARD CONFIG ---
 JAZZMIN_SETTINGS = {
     "site_title": "Afrikan Kismat Admin",
     "site_header": "Afrikan Kismat",
@@ -170,3 +155,13 @@ MPESA_CONSUMER_SECRET = os.environ.get('MPESA_CONSUMER_SECRET')
 MPESA_PASSKEY = os.environ.get('MPESA_PASSKEY')
 MPESA_SHORTCODE = os.environ.get('MPESA_SHORTCODE')
 MPESA_INITIATOR_PASSWORD = os.environ.get('MPESA_INITIATOR_PASSWORD')
+
+# --- EMAIL CONFIGURATION (Secure) ---
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+# Securely read credentials from Environment Variables
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = 'Afrikan Kismat <bookings@afrikankismat.com>'
