@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Page Not Found | Afrikan Kismat{% endblock %}
+
+{% block content %}
+<div class="min-h-[70vh] flex items-center justify-center bg-safari-sand relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+    
+    <div class="text-center px-6 relative z-10 max-w-2xl mx-auto">
+        <div class="text-safari-clay text-8xl mb-4">
+            <i class="fas fa-compass"></i>
+        </div>
+        
+        <h1 class="text-6xl md:text-8xl font-black text-gray-900 font-header mb-2">404</h1>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-700 mb-6 uppercase tracking-widest">Lost in the Bush?</h2>
+        
+        <p class="text-gray-500 text-lg mb-10 leading-relaxed">
+            It looks like you've ventured off the map. The page you are looking for has either moved or doesn't exist. 
+            Don't worry, our guides can get you back on track.
+        </p>
+        
+        <div class="flex flex-col md:flex-row gap-4 justify-center">
+            <a href="{% url 'home' %}" class="bg-safari-clay text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-safari-dark transition shadow-lg">
+                Return to Camp (Home)
+            </a>
+            <a href="{% url 'safaris' %}" class="bg-white text-gray-900 border-2 border-gray-200 px-8 py-4 rounded-full font-bold uppercase tracking-widest hover:border-safari-clay hover:text-safari-clay transition shadow-lg">
+                View Safaris
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
