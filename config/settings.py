@@ -14,7 +14,21 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dl)5blh(x9o$fp_jo3(0w
 
 # We keep DEBUG=True for now to help with errors.
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = ['*']
+
+# 1. ALLOWED HOSTS: Who can host this site?
+ALLOWED_HOSTS = [
+    '*', 
+    'kismatexpeditions.com', 
+    'www.kismatexpeditions.com', 
+    'afrikan-kismat.onrender.com'
+]
+
+# 2. CSRF TRUSTED ORIGINS: Critical for Forms to work on Custom Domain
+CSRF_TRUSTED_ORIGINS = [
+    'https://afrikan-kismat.onrender.com',
+    'https://kismatexpeditions.com',
+    'https://www.kismatexpeditions.com',
+]
 
 INSTALLED_APPS = [
     # 1. Jazzmin must be ABOVE 'django.contrib.admin'
