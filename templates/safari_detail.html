@@ -45,64 +45,44 @@
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 border-y border-gray-100 py-8">
                 <div class="text-center">
-                    <div class="w-12 h-12 bg-safari-sand rounded-full flex items-center justify-center mx-auto mb-3 text-safari-clay text-xl">
-                        <i class="fas fa-paw"></i>
-                    </div>
+                    <div class="w-12 h-12 bg-safari-sand rounded-full flex items-center justify-center mx-auto mb-3 text-safari-clay text-xl"><i class="fas fa-paw"></i></div>
                     <span class="text-xs font-bold uppercase text-gray-500">Big Five</span>
                 </div>
                 <div class="text-center">
-                    <div class="w-12 h-12 bg-safari-sand rounded-full flex items-center justify-center mx-auto mb-3 text-safari-clay text-xl">
-                        <i class="fas fa-shuttle-van"></i>
-                    </div>
+                    <div class="w-12 h-12 bg-safari-sand rounded-full flex items-center justify-center mx-auto mb-3 text-safari-clay text-xl"><i class="fas fa-shuttle-van"></i></div>
                     <span class="text-xs font-bold uppercase text-gray-500">4x4 Transport</span>
                 </div>
                 <div class="text-center">
-                    <div class="w-12 h-12 bg-safari-sand rounded-full flex items-center justify-center mx-auto mb-3 text-safari-clay text-xl">
-                        <i class="fas fa-bed"></i>
-                    </div>
+                    <div class="w-12 h-12 bg-safari-sand rounded-full flex items-center justify-center mx-auto mb-3 text-safari-clay text-xl"><i class="fas fa-bed"></i></div>
                     <span class="text-xs font-bold uppercase text-gray-500">Luxury Lodges</span>
                 </div>
                 <div class="text-center">
-                    <div class="w-12 h-12 bg-safari-sand rounded-full flex items-center justify-center mx-auto mb-3 text-safari-clay text-xl">
-                        <i class="fas fa-users"></i>
-                    </div>
+                    <div class="w-12 h-12 bg-safari-sand rounded-full flex items-center justify-center mx-auto mb-3 text-safari-clay text-xl"><i class="fas fa-users"></i></div>
                     <span class="text-xs font-bold uppercase text-gray-500">Private Guide</span>
                 </div>
             </div>
 
             {% if safari.itinerary_days.all %}
             <h2 class="text-2xl font-bold text-gray-900 mb-8 font-header">Day-by-Day Itinerary</h2>
-            
             <div class="space-y-0 relative border-l-2 border-dashed border-gray-200 ml-4 md:ml-6 pb-4">
                 {% for day in safari.itinerary_days.all %}
                 <div class="relative pl-8 md:pl-12 pb-12 group last:pb-0">
-                    
                     <div class="absolute -left-[9px] top-0 w-5 h-5 rounded-full bg-safari-sand border-4 border-white shadow-sm group-hover:bg-safari-clay transition duration-300"></div>
-                    
                     <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-3">
-                        <span class="bg-safari-clay text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest w-fit">
-                            Day {{ day.day_number }}
-                        </span>
+                        <span class="bg-safari-clay text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest w-fit">Day {{ day.day_number }}</span>
                         <h3 class="text-lg font-bold text-gray-900 font-header">{{ day.title }}</h3>
                     </div>
-
-                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                        {{ day.description|linebreaksbr }}
-                    </p>
-
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">{{ day.description|linebreaksbr }}</p>
                     {% if day.accommodation or day.meals %}
                     <div class="bg-gray-50 rounded-lg p-4 flex flex-wrap gap-6 border border-gray-100">
                         {% if day.accommodation %}
                         <div class="flex items-center gap-2 text-xs font-bold text-gray-500 uppercase tracking-wide">
-                            <i class="fas fa-bed text-safari-clay"></i> 
-                            <span>{{ day.accommodation }}</span>
+                            <i class="fas fa-bed text-safari-clay"></i> <span>{{ day.accommodation }}</span>
                         </div>
                         {% endif %}
-                        
                         {% if day.meals %}
                         <div class="flex items-center gap-2 text-xs font-bold text-gray-500 uppercase tracking-wide">
-                            <i class="fas fa-utensils text-safari-clay"></i> 
-                            <span>{{ day.meals }}</span>
+                            <i class="fas fa-utensils text-safari-clay"></i> <span>{{ day.meals }}</span>
                         </div>
                         {% endif %}
                     </div>
@@ -133,7 +113,6 @@
                     </ul>
                 </div>
             </div>
-
         </div>
 
         <div class="lg:col-span-1">
@@ -154,42 +133,15 @@
                 
                 <form method="post" class="space-y-4">
                     {% csrf_token %}
-                    
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Your Name</label>
-                        {{ form.name }}
-                    </div>
-
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Email Address</label>
-                        {{ form.email }}
-                    </div>
-
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Phone / WhatsApp</label>
-                        {{ form.phone }}
-                    </div>
-
+                    <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Your Name</label>{{ form.name }}</div>
+                    <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Email Address</label>{{ form.email }}</div>
+                    <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Phone / WhatsApp</label>{{ form.phone }}</div>
                     <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Adults</label>
-                            {{ form.adults }}
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Children</label>
-                            {{ form.children }}
-                        </div>
+                        <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Adults</label>{{ form.adults }}</div>
+                        <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Children</label>{{ form.children }}</div>
                     </div>
-
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Travel Date</label>
-                        {{ form.travel_date }}
-                    </div>
-
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Message / Interests</label>
-                        {{ form.message }}
-                    </div>
+                    <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Travel Date</label>{{ form.travel_date }}</div>
+                    <div><label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Message / Interests</label>{{ form.message }}</div>
 
                     <button type="submit" class="w-full bg-safari-clay text-white font-bold py-4 rounded-xl uppercase tracking-widest text-xs hover:bg-safari-dark transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                         Send Inquiry
@@ -199,13 +151,8 @@
                         <i class="fas fa-lock"></i> Your details are secure. We reply within 24hrs.
                     </p>
                 </form>
-
-                <div class="mt-6 pt-6 border-t border-gray-100">
-                    <a href="https://wa.me/254790819330?text=I'm%20interested%20in%20{{ safari.title }}" target="_blank" class="block w-full text-center border-2 border-green-500 text-green-600 font-bold py-3 rounded-xl hover:bg-green-50 transition flex justify-center items-center gap-2 text-xs uppercase tracking-wider">
-                        <i class="fab fa-whatsapp text-lg"></i> Chat on WhatsApp
-                    </a>
+                
                 </div>
-            </div>
         </div>
 
     </div>

@@ -1,10 +1,26 @@
 """
 Django settings for config project.
 """
+import os
+from dotenv import load_dotenv
+
+load_dotenv() # Load variables from .env file
+
+# ... existing code ...
+
+# Add these at the bottom of settings.py
+MPESA_CONSUMER_KEY = os.getenv('MPESA_CONSUMER_KEY')
+MPESA_CONSUMER_SECRET = os.getenv('MPESA_CONSUMER_SECRET')
+MPESA_PASSKEY = os.getenv('MPESA_PASSKEY')
+MPESA_SHORTCODE = os.getenv('MPESA_SHORTCODE')
 
 import os
 import dj_database_url
 from pathlib import Path
+from dotenv import load_dotenv # <--- IMPORT THIS
+
+# Load environment variables from .env file
+load_dotenv() 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dl)5blh(x9o$fp_jo3(0wktx(hm)u$7^u#eg+kyfc!n#(w(*xy')
@@ -25,7 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # Custom Apps
     'core',
+    'payments', # <--- NEW APP REGISTERED HERE
 ]
 
 MIDDLEWARE = [
@@ -143,3 +162,11 @@ JAZZMIN_UI_TWEAKS = {
         "success": "btn-success"
     }
 }
+
+# --- M-PESA CONFIGURATION ---
+MPESA_ENVIRONMENT = os.environ.get('MPESA_ENVIRONMENT', 'sandbox')
+MPESA_CONSUMER_KEY = os.environ.get('MPESA_CONSUMER_KEY')
+MPESA_CONSUMER_SECRET = os.environ.get('MPESA_CONSUMER_SECRET')
+MPESA_PASSKEY = os.environ.get('MPESA_PASSKEY')
+MPESA_SHORTCODE = os.environ.get('MPESA_SHORTCODE')
+MPESA_INITIATOR_PASSWORD = os.environ.get('MPESA_INITIATOR_PASSWORD')
